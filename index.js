@@ -1,4 +1,4 @@
-const { TOKEN, CHANNEL, SERVER, STATUS, LIVE } = require("./config.json");
+const { LIVE } = require("./config.json");
 const discord = require("discord.js");
 const client = new discord.Client();
 const ytdl = require('ytdl-core');
@@ -12,8 +12,8 @@ client.on('ready', async () => {
 })
 
 setInterval(async function() {
-  if(!client.voice.connections.get(SERVER)) {
-    let channel = client.channels.cache.get(CHANNEL) || await client.channels.fetch(CHANNEL)
+  if(!client.voice.connections.get(process.env.SERVER)) {
+    let channel = client.channels.cache.get(process.env.CHANNEL) || await client.channels.fetch(process.env.CHANNEL);
     if(!channel) return;
 
     const connection = await channel.join()
@@ -21,4 +21,4 @@ setInterval(async function() {
   }
 }, 20000)
 
-client.login(TOKEN)
+client.login(process.env.TOKEN)
