@@ -4,7 +4,7 @@ const client = new discord.Client();
 const ytdl = require('ytdl-core');
 
 client.on('ready', async () => {
-  let channel = client.channels.cache.get(CHANNEL) || await client.channels.fetch(CHANNEL)
+  let channel = client.channels.cache.get(process.env.CHANNEL) || await client.channels.fetch(process.env.CHANNEL)
 
   if(!channel) return;
   const connection = await channel.join();
